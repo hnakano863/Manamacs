@@ -32,20 +32,4 @@
   :custom
   (use-package-compute-statistics t "gather init statistics"))
 
-;; evil
-(use-package evil
-  :custom
-  (evil-want-C-u-scroll t "use C-u to scroll")
-  :config
-  (evil-mode t))
-
-;;; doom-themes
-(use-package doom-themes
-  :config
-  (load-theme 'doom-opera t))
-
-(use-package doom-modeline
-  :config
-  (doom-modeline-mode t))
-
 @usePackageExpr@

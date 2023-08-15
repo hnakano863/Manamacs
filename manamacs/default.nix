@@ -6,17 +6,15 @@ with import ./lib.nix { inherit lib; };
 let
 
   packageConfigs = lib.attrsets.mergeAttrsList [
+    (import ./ui.nix)
     (import ./completions.nix)
   ];
 
   packageConfigs' = normalizePkgConf packageConfigs;
 
-  extraPackages = epkgs: with epkgs; [
-    doom-modeline
-    doom-themes
-    evil
-    use-package
-  ] ++ (collectEnsures' epkgs packageConfigs');
+  extraPackages = epkgs:
+    [ epkgs.use-package ] ++
+    (collectEnsures' epkgs packageConfigs');
 
 
   default-el = epkgs: epkgs.trivialBuild {
