@@ -28,6 +28,10 @@
 (eval-when-compile
   (require 'use-package))
 
+(use-package use-package
+  :custom
+  (use-package-compute-statistics t "gather init statistics"))
+
 ;; evil
 (use-package evil
   :custom
