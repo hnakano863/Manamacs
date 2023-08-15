@@ -31,7 +31,7 @@
 ;; evil
 (use-package evil
   :custom
-  (evil-want-C-u-scroll . t)
+  (evil-want-C-u-scroll t "use C-u to scroll")
   :config
   (evil-mode t))
 
