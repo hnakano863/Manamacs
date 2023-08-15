@@ -28,6 +28,11 @@
 (eval-when-compile
   (require 'use-package))
 
+;; evil
 (use-package evil
+  :custom
+  (evil-want-C-u-scroll . t)
   :config
   (evil-mode t))
+
+;; doom-themes
