@@ -18,9 +18,14 @@ let
     use-package
   ] ++ (collectEnsures' epkgs packageConfigs');
 
+
   default-el = epkgs: epkgs.trivialBuild {
     pname = "default";
-    src = ./default.el;
+    src = runCommand "default.el" {
+      usePackageExpr = usePackageExprFrom packageConfigs';
+    } ''
+      substituteAll "${./default.el}" $out
+    '';
     packageRequires = extraPackages epkgs;
   };
 

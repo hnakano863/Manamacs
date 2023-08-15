@@ -48,24 +48,4 @@
   :config
   (doom-modeline-mode t))
 
-;;; completions
-
-;; completion UI
-(use-package vertico
-  :config
-  (vertico-mode t))
-
-;; persist the completion history
-;; vertico sorts by history position
-(use-package savehist
-  :config
-  (savehist-mode t))
-
-;; provide completion commands
-(use-package consult
-  :bind (("C-s" . consult-line)))
-
-;; provide orderless completion algorithm
-(use-package orderless
-  :custom
-  (completion-styles '(orderless basic) "use orderless completion style"))
+@usePackageExpr@
