@@ -24,7 +24,7 @@
       in
       rec {
 
-        manamacs = pkgs.emacs;
+        manamacs = import ./manamacs.nix { inherit pkgs; };
 
         default = manamacs;
 
