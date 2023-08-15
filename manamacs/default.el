@@ -36,3 +36,10 @@
   (evil-mode t))
 
 ;; doom-themes
+(use-package doom-themes
+  :config
+  (load-theme 'doom-opera t))
+
+(use-package doom-modeline
+  :config
+  (doom-modeline-mode t))

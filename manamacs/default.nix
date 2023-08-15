@@ -16,6 +16,8 @@ in
 
 emacs'.withPackages (epkgs: with epkgs; [
   default-el
+  doom-modeline
+  doom-themes
   evil
   use-package
 ])
