@@ -7,21 +7,22 @@ let
   overrides = import ./overrides.nix;
   emacs' = (emacsPackagesFor emacs).overrideScope' overrides;
 
-  default-el = runCommand "default.el" { src = ./default.el; } ''
-    mkdir -p $out/share/emacs/site-lisp
-    cp $src $out/share/emacs/site-lisp/default.el
-  '';
+  extraPackages = epkgs: with epkgs; [
+    consult
+    doom-modeline
+    doom-themes
+    evil
+    orderless
+    use-package
+    vertico
+  ];
+
+  default-el = epkgs: epkgs.trivialBuild {
+    pname = "default";
+    src = ./default.el;
+    packageRequires = extraPackages epkgs;
+  };
 
 in
 
-emacs'.withPackages (epkgs: with epkgs; [
-  default-el
-
-  consult
-  doom-modeline
-  doom-themes
-  evil
-  orderless
-  use-package
-  vertico
-])
+emacs'.withPackages (epkgs: [ (default-el epkgs) ])
