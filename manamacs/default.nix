@@ -16,8 +16,12 @@ in
 
 emacs'.withPackages (epkgs: with epkgs; [
   default-el
+
+  consult
   doom-modeline
   doom-themes
   evil
+  orderless
   use-package
+  vertico
 ])
