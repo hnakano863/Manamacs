@@ -24,7 +24,10 @@
       in
       rec {
 
-        manamacs = import ./manamacs { inherit pkgs; };
+        manamacs = import ./manamacs {
+          inherit pkgs;
+          inherit (pkgs) lib;
+        };
 
         default = manamacs;
 
