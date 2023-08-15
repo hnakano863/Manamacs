@@ -30,7 +30,12 @@ rec {
   confExpr = f: k: conf: if conf."${k}" == null then "" else ":${k} ${f k conf}";
 
   # concatAttrsWith :: (String -> Any -> String) -> Any -> String
-  concatAttrsWith = f: attrs: concatStringsSep "\n" (mapAttrsToList f attrs);
+  concatAttrsWith = f: attrs:
+    let
+      exprList = mapAttrsToList f attrs;
+      exprList' = filter (elem: stringLength elem > 0) exprList;
+    in
+    concatStringsSep "\n" exprList';
 
   customExpr = conf:
     let
@@ -44,13 +49,27 @@ rec {
       expr = k: conf': "(${concatAttrsWith f conf'.bind})";
     in confExpr expr "bind" conf;
 
-  usePackageExprFrom' = p: conf: ''
-    (use-package ${p}
-      ${confExpr getAttr "init" conf}
-      ${customExpr conf}
-      ${bindExpr conf}
-      ${confExpr getAttr "config" conf})
-  '';
+  usePackageExprFrom' = p: conf:
+    let
+      kwFuncMap = {
+
+        init = getAttr;
+
+        custom = kw: conf:
+          let f = k: v: "(${k} ${v} \"customized by nix\")"; in
+          concatAttrsWith f conf."${kw}";
+
+        bind = kw: conf:
+          let f = k: v: "(${k} . ${v})"; in
+          "(" + (concatAttrsWith f conf."${kw}") + ")";
+
+        config = getAttr;
+      };
+
+    in ''
+      (use-package ${p}
+        ${concatAttrsWith (kw: f: confExpr f kw conf) kwFuncMap})
+    '';
 
   usePackageExprFrom = pkgConf: concatAttrsWith usePackageExprFrom' pkgConf;
 }
