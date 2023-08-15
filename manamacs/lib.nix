@@ -8,6 +8,7 @@ rec {
   defaultConf = {
     init = null;
     custom = null;
+    mode = null;
     config = null;
     bind = null;
     ensure = true;
@@ -58,6 +59,8 @@ rec {
         custom = kw: conf:
           let f = k: v: "(${k} ${v} \"customized by nix\")"; in
           concatAttrsWith f conf."${kw}";
+
+        mode = getAttr;
 
         bind = kw: conf:
           let f = k: v: "(${k} . ${v})"; in

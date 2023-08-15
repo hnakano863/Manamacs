@@ -8,6 +8,7 @@ let
   packageConfigs = lib.attrsets.mergeAttrsList [
     (import ./ui.nix)
     (import ./completions.nix)
+    (import ./languages.nix)
   ];
 
   packageConfigs' = normalizePkgConf packageConfigs;
