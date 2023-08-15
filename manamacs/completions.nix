@@ -17,4 +17,8 @@
   orderless.custom = {
     "completion-styles" = "'(orderless basic)";
   };
+
+  marginalia.config = ''
+    (marginalia-mode t)
+  '';
 }
