@@ -6,9 +6,9 @@ with import ./lib.nix { inherit lib; };
 let
 
   packageConfigs = lib.attrsets.mergeAttrsList [
-    (import ./ui.nix)
-    (import ./completions.nix)
-    (import ./languages.nix)
+    (import ./modules/ui.nix)
+    (import ./modules/completions.nix)
+    (import ./modules/languages.nix)
   ];
 
   packageConfigs' = normalizePkgConf packageConfigs;
