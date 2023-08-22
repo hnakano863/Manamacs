@@ -11,7 +11,7 @@
   };
 
   consult.bind = {
-    "C-s" = "consult-line";
+    "\"C-s\"" = "consult-line";
   };
 
   orderless.custom = {
