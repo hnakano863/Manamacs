@@ -1,6 +1,7 @@
 {
 
   treemacs = {
+    commands = "treemacs";
     custom = {
       "treemacs-width" = "30";
     };

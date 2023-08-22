@@ -8,6 +8,7 @@ let
   packageConfigs = lib.attrsets.mergeAttrsList [
     (import ./modules/ui.nix)
     (import ./modules/completions.nix)
+    (import ./modules/treemacs.nix)
     (import ./modules/languages.nix)
   ];
 

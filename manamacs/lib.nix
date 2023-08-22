@@ -6,6 +6,7 @@ rec {
 
   # default package config
   defaultConf = {
+    commands = null;
     init = null;
     custom = null;
     after = null;
@@ -54,6 +55,8 @@ rec {
   usePackageExprFrom' = p: conf:
     let
       kwFuncMap = {
+
+        commands = getAttr;
 
         init = getAttr;
 
